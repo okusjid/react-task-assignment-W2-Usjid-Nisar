@@ -18,6 +18,7 @@ A React application that displays a list of Star Wars characters using the SWAPI
 ```bash
 git clone https://github.com/okusjid/star-wars.git
 cd star-wars
+```
 
 ## Folder Structure
 
