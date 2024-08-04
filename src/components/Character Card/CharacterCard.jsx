@@ -1,4 +1,4 @@
-import { getCharacterImageUrl } from '../services/api';
+import { getCharacterImageUrl } from '../../services/api';
 import './CharacterCard.css';
 
 const CharacterCard = ({ character, speciesColor, onClick }) => {

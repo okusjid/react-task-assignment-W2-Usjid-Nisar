@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { getCharacters, getHomeWorld } from './services/api';
 import Loader from './components/Loader/Loader';
-import CharacterCard from './components/CharacterCard';
+import CharacterCard from './components/Character Card/CharacterCard';
 import CharacterModal from './components/CharacterModal';
 import SearchFilter from './components/SearchFilter';
 
