@@ -22,7 +22,7 @@ const SearchFilter = ({ onSearch, onFilter }) => {
         value={search}
         onChange={handleSearchChange}
       />
-      <select value={filter} onChange={handleFilterChange}>
+      <select value={filter} onChange={handleFilterChange} placeholder="Filter by">
         <option value="">Filter by</option>
         <option value="homeworld">Homeworld</option>
         <option value="species">Species</option>

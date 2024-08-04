@@ -6,6 +6,7 @@ import CharacterCard from './components/Character Card/CharacterCard';
 import CharacterModal from './components/CharacterModal';
 import SearchFilter from './components/SearchFilter';
 
+
 const App = () => {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,6 +16,13 @@ const App = () => {
   const [filteredCharacters, setFilteredCharacters] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterOption, setFilterOption] = useState('');
+  const [page, setPage] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [character, setCharacter] = useState({}); // Add your character data
+
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
     fetchData();
@@ -61,7 +69,7 @@ const App = () => {
     }
 
     if (filter) {
-      // Apply additional filtering logic here based on filter option
+      // Apply additional filtering logic here based on filter option. 
     }
 
     setFilteredCharacters(filtered);
@@ -83,14 +91,18 @@ const App = () => {
           />
         ))}
       </div>
-      {selectedCharacter && (
-        <CharacterModal
-          isOpen={!!selectedCharacter}
-          onRequestClose={handleCloseModal}
-          character={selectedCharacter}
-          homeWorld={homeWorld}
-        />
-      )}
+      {/* {selectedCharacter && (
+        <>
+
+        <button onClick={openModal}>Show Character</button>
+      <CharacterModal
+        isOpen={isModalOpen}
+        close={closeModal}
+        character={character}
+        homeWorld={homeWorld}
+      />
+        </>
+      )} */}
     </div>
    
   );
