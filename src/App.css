@@ -1,42 +1,125 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
   text-align: center;
+  padding: 20px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Character List Styles */
+.character-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Character Card Styles */
+.character-card {
+  width: 200px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+  overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.character-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-.card {
-  padding: 2em;
+.character-card img {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
-.read-the-docs {
-  color: #888;
+.character-card h3 {
+  margin: 10px 0;
+  font-size: 1.2em;
+  color: #333;
+}
+
+/* Loader Styles */
+.loader {
+  margin: 50px auto;
+  font-size: 1.5em;
+  color: #555;
+}
+
+/* Modal Styles */
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}
+
+.ReactModal__Content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.ReactModal__Content h2 {
+  margin-top: 0;
+}
+
+.ReactModal__Content p {
+  margin: 10px 0;
+}
+
+.ReactModal__Content button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.ReactModal__Content button:hover {
+  background-color: #0056b3;
+}
+
+/* Search and Filter Styles */
+.search-filter {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-filter input,
+.search-filter select {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.search-filter input:focus,
+.search-filter select:focus {
+  border-color: #007bff;
+  outline: none;
 }

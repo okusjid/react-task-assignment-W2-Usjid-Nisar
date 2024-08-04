@@ -1,0 +1,47 @@
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(to right, red, yellow); /* Gradient background */
+    background-clip: padding-box, border-box; /* Separates background from border */
+    box-shadow: 0 0 0 8px rgba(0,0,0,0) inset; /* Simulates border inside */
+  }
+  
+  .loader::before {
+    content: "";
+    position: absolute;
+    top: -8px; /* Adjust to the width of the border */
+    left: -8px;
+    height: calc(100% + 16px); /* Adjust based on border width */
+    width: calc(100% + 16px);
+    border-radius: 50%;
+    background: linear-gradient(to right, red, yellow);
+    z-index: -1;
+    filter: blur(8px); /* Optional: Adds a slight blur to the border */
+  }
+  
+  .loader-text {
+    z-index: 2; /* Ensures text is above the spinning background */
+    color: #333;
+    font-weight: bold;
+    font-size: 1.2rem;
+    position: relative;
+  }
+  
+  @keyframes spin {
+    0% { 
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% { 
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+  
