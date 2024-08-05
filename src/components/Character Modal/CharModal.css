@@ -27,6 +27,8 @@
   max-width: 400px; /* Smaller max-width for a more compact design */
   background: #ffffff; /* Bright white background */
   padding: 5px;
+  padding-left: 40px ;
+  padding-right: 40px ;
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
   transform: scale(0.9);

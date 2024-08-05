@@ -21,20 +21,20 @@ const CharacterModal = ({ isOpen, close, character, homeWorld }) => {
   return (
     <div className={`overlayStyle ${isOpen ? 'active' : ''}`} onClick={close}>
       <div className={`modalStyle ${isOpen ? 'active' : ''}`} onClick={stopPropagation}>
-        <h2>{character.name}</h2>
-        <p>Height: {character.height / 100} meters</p>
-        <p>Mass: {character.mass} kg</p>
-        <p>Birth Year: {character.birth_year}</p>
-        <p>Date Added: {format(new Date(character.created), 'dd-MM-yyyy')}</p>
-        <p>Number of Films: {character.films.length}</p>
+        <h2><strong>{character.name}</strong></h2>
+        <p><strong>Height:</strong> {character.height / 100} meters</p>
+        <p><strong>Mass: </strong>{character.mass} kg</p>
+        <p><strong>Birth Year:</strong> {character.birth_year}</p>
+        <p><strong>Date Added: </strong>{format(new Date(character.created), 'dd-MM-yyyy')}</p>
+        <p><strong>Number of Films:</strong> {character.films.length}</p>
         {homeWorld && (
-          <>
-            <h3>Home World</h3>
-            <p>Name: {homeWorld.name}</p>
-            <p>Terrain: {homeWorld.terrain}</p>
-            <p>Climate: {homeWorld.climate}</p>
-            <p>Number of Residents: {homeWorld.residents.length}</p>
-          </>
+          <div style={{ textDecoration: 'capitalize' }}>
+            <h3><strong>Home World</strong></h3>
+            <p><strong>Name: </strong>{homeWorld.name}</p>
+            <p><strong>Terrain: </strong>{homeWorld.terrain}</p>
+            <p><strong>Climate: </strong>{homeWorld.climate}</p>
+            <p><strong>Number of Residents:</strong> {homeWorld.residents.length}</p>
+          </div>
         )}
         <button onClick={close}>Close</button>
       </div>
