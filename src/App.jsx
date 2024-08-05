@@ -117,7 +117,7 @@ const App = () => {
             <CharacterCard
               key={character.name}
               character={character}
-              speciesColor="lightblue" // change color
+              speciesColor={character.eye_color || character.hair_color ||  "brown"} // change color
               onClick={() => handleCharacterClick(character)}
             />
           ))}
