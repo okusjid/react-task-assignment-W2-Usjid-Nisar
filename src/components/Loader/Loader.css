@@ -4,7 +4,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 200px;
-    height: 200px;
+    height: 100px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -16,7 +16,6 @@
   }
   
   .loader::before {
-    content: "";
     position: absolute;
     top: -8px; /* Adjust to the width of the border */
     left: -8px;
@@ -28,20 +27,11 @@
     filter: blur(8px); /* Optional: Adds a slight blur to the border */
   }
   
-  .loader-text {
-    z-index: 2; /* Ensures text is above the spinning background */
+  /* .loader-text {
+    z-index: 2; 
     color: #333;
     font-weight: bold;
     font-size: 1.2rem;
     position: relative;
-  }
-  
-  @keyframes spin {
-    0% { 
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-    100% { 
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
-  }
-  
+    text-align: center;
+  } */
