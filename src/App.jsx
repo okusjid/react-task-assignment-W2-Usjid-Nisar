@@ -72,10 +72,10 @@ const App = () => {
     filterAndSearch(query, filterOption);
   };
 
-  // const handleFilter = (option) => {
-  //   setFilterOption(option);
-  //   filterAndSearch(searchQuery, option);
-  // };
+  const handleFilter = (option) => {
+    setFilterOption(option);
+    filterAndSearch(searchQuery, option);
+  };
 
   const filterAndSearch = (search, filter) => {
     let filtered = characters;
@@ -85,7 +85,8 @@ const App = () => {
     }
 
     if (filter) {
-      // Apply filter option
+      // filtered = filtered.filter(character => character.filterOption === filter);
+      //Add filter for species
     }
 
     setFilteredCharacters(filtered);
@@ -106,6 +107,20 @@ const App = () => {
         value={searchQuery}
         onChange={(e) => handleSearch(e.target.value)}
       />
+
+      {/* <select onChange={(e) => handleFilter(e.target.value)}>
+        <option value="">All</option>
+        <option
+          value="Tatooine"
+        >
+          Tatooine
+        </option>
+        <option
+          value="Droid"
+        >
+          Droid
+        </option>
+        </select> */}
 
       <div className="container">
         <div className='previouspage'>
@@ -128,23 +143,8 @@ const App = () => {
         </div>
       </div>
 
-      {/* <div>
-        { !selectedCharacter ? (
-          <h1>No character selected</h1>
-        ) : (
-          <>
-            <h1>Character selected</h1>
-            <h1>{selectedCharacter.name}</h1>
-          </>
-        )}
-      </div> */}
-
-      {/* <select value={filterOption} onChange={(e) => handleFilter(e.target.value)}>
-        <option value="">All</option>
-        <option value="human">Humans</option>
-        <option value="droid">Droids</option>
-        <option value="wookie">Wookies</option>
-      </select> */}
+    
+      
 
 
       {selectedCharacter && (
@@ -159,8 +159,6 @@ const App = () => {
       )}
 =
     </div>
-
-
   );
 };
 
