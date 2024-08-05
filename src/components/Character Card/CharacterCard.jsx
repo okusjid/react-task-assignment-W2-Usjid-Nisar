@@ -1,4 +1,5 @@
 import { getCharacterImageUrl } from '../../services/api';
+import PropTypes from 'prop-types';
 import './CharacterCard.css';
 
 const CharacterCard = ({ character, speciesColor, onClick }) => {
@@ -12,5 +13,15 @@ const CharacterCard = ({ character, speciesColor, onClick }) => {
     </div>
   );
 };
+
+CharacterCard.propTypes = {
+  character: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  }).isRequired,
+  speciesColor: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
 
 export default CharacterCard;
