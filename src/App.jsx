@@ -6,7 +6,6 @@ import CharacterModal from './components/Character Modal/CharacterModal';
 
 import './App.css';
 
-import { set } from 'date-fns';
 
 
 const App = () => {
@@ -20,9 +19,9 @@ const App = () => {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [homeWorld, setHomeWorld] = useState(null);
   
-  
   const [filterOption, setFilterOption] = useState('');
-  // const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
+  
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);

@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 import './CharModal.css';
 
@@ -39,6 +40,27 @@ const CharacterModal = ({ isOpen, close, character, homeWorld }) => {
       </div>
     </div>
   );
+};
+
+
+// validation
+CharacterModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  close: PropTypes.func.isRequired,
+  character: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    height: PropTypes.number.isRequired,
+    mass: PropTypes.number.isRequired,
+    birth_year: PropTypes.string.isRequired,
+    created: PropTypes.string.isRequired,
+    films: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+  homeWorld: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    terrain: PropTypes.string.isRequired,
+    climate: PropTypes.string.isRequired,
+    residents: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }),
 };
 
 export default CharacterModal;
