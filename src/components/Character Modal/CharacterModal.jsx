@@ -1,35 +1,15 @@
-import React, { useState } from 'react';
-
-// CSS styles for the modal
-const modalStyle = {
-  position: 'fixed',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  zIndex: '1000',
-  background: 'white',
-  padding: '20px',
-  borderRadius: '8px',
-  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-};
-
-const overlayStyle = {
-  position: 'fixed',
-  top: '0',
-  left: '0',
-  right: '0',
-  bottom: '0',
-  backgroundColor: 'rgba(0, 0, 0, 0.7)',
-  zIndex: '1000'
-};
+import React from 'react';
+import { format } from 'date-fns';
+import './CharModal.css';
 
 const CharacterModal = ({ isOpen, close, character, homeWorld }) => {
   if (!isOpen) return null;
 
+  const stopPropagation = (e) => e.stopPropagation();
+
   return (
-    <>
-      <div style={overlayStyle} onClick={close} />
-      <div style={modalStyle}>
+    <div className='overlayStyle' onClick={close}>
+      <div className='modalStyle' onClick={stopPropagation}>
         <h2>{character.name}</h2>
         <p>Height: {character.height / 100} meters</p>
         <p>Mass: {character.mass} kg</p>
@@ -47,9 +27,8 @@ const CharacterModal = ({ isOpen, close, character, homeWorld }) => {
         )}
         <button onClick={close}>Close</button>
       </div>
-    </>
+    </div>
   );
 };
-
 
 export default CharacterModal;

@@ -1,25 +1,28 @@
 import { useState, useEffect } from 'react';
-import './App.css';
 import { getCharacters, getHomeWorld } from './services/api';
 import Loader from './components/Loader/Loader';
 import CharacterCard from './components/Character Card/CharacterCard';
-import CharacterModal from './components/CharacterModal';
-import SearchFilter from './components/SearchFilter';
+import CharacterModal from './components/Character Modal/CharacterModal';
+
+import './App.css';
+
+import { set } from 'date-fns';
 
 
 const App = () => {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
-  const [homeWorld, setHomeWorld] = useState(null);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterOption, setFilterOption] = useState('');
-  const [page, setPage] = useState(1);
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [character, setCharacter] = useState({}); // Add your character data
-
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [homeWorld, setHomeWorld] = useState(null);
+  
+  
+  // const [filterOption, setFilterOption] = useState('');
+  // const [page, setPage] = useState(1);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -44,22 +47,21 @@ const App = () => {
     setSelectedCharacter(character);
     const homeWorldResponse = await getHomeWorld(character.homeworld);
     setHomeWorld(homeWorldResponse.data);
+    openModal();
+    // console.log(character);
+    // console.log(homeWorldResponse);
   };
 
-  const handleCloseModal = () => {
-    setSelectedCharacter(null);
-    setHomeWorld(null);
-  };
-
+  
   const handleSearch = (query) => {
     setSearchQuery(query);
     filterAndSearch(query, filterOption);
   };
 
-  const handleFilter = (option) => {
-    setFilterOption(option);
-    filterAndSearch(searchQuery, option);
-  };
+  // const handleFilter = (option) => {
+  //   setFilterOption(option);
+  //   filterAndSearch(searchQuery, option);
+  // };
 
   const filterAndSearch = (search, filter) => {
     let filtered = characters;
@@ -69,42 +71,73 @@ const App = () => {
     }
 
     if (filter) {
-      // Apply additional filtering logic here based on filter option. 
+      // Apply filter option
     }
 
     setFilteredCharacters(filtered);
   };
+
 
   if (loading) return <Loader />;
   if (error) return <div>Error loading data</div>;
 
   return (
     <div className="App">
-      <SearchFilter onSearch={handleSearch} onFilter={handleFilter} />
+
+      <h1>Star Wars Characters</h1>
+
+      <input
+        type="text"
+        placeholder="Search characters"
+        value={searchQuery}
+        onChange={(e) => handleSearch(e.target.value)}
+      />
+
+
+
+
       <div className="character-list">
         {filteredCharacters.map((character) => (
           <CharacterCard
             key={character.name}
             character={character}
-            speciesColor="lightblue" // You can add logic to determine the color based on species
+            speciesColor="lightblue" // change color
             onClick={() => handleCharacterClick(character)}
           />
         ))}
       </div>
-      {/* {selectedCharacter && (
-        <>
 
-        <button onClick={openModal}>Show Character</button>
-      <CharacterModal
-        isOpen={isModalOpen}
-        close={closeModal}
-        character={character}
-        homeWorld={homeWorld}
-      />
+      {/* <div>
+        { !selectedCharacter ? (
+          <h1>No character selected</h1>
+        ) : (
+          <>
+            <h1>Character selected</h1>
+            <h1>{selectedCharacter.name}</h1>
+          </>
+        )}
+      </div> */}
+
+      {/* <select value={filterOption} onChange={(e) => handleFilter(e.target.value)}>
+        <option value="">All</option>
+        <option value="human">Humans</option>
+        <option value="droid">Droids</option>
+        <option value="wookie">Wookies</option>
+      </select> */}
+
+
+      {selectedCharacter && (
+        <>
+          <CharacterModal
+            isOpen={isModalOpen}
+            close={closeModal}
+            character={selectedCharacter}
+            homeWorld={homeWorld}
+          />
         </>
-      )} */}
+      )}
     </div>
-   
+
   );
 };
 

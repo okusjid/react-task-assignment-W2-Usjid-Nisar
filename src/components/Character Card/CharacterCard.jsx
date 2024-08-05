@@ -2,7 +2,7 @@ import { getCharacterImageUrl } from '../../services/api';
 import './CharacterCard.css';
 
 const CharacterCard = ({ character, speciesColor, onClick }) => {
-  const charId = character.url.split('/').slice(-2, -1)[0]; // Extract character ID from URL
+  const charId = character.url.split('/').slice(-2, -1)[0]; 
   const imageUrl = getCharacterImageUrl(charId);
 
   return (
