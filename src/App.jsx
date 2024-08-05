@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getCharacters, getHomeWorld } from './services/api';
+import { getCharactersByPage, getHomeWorld } from './services/api';
 import Loader from './components/Loader/Loader';
 import CharacterCard from './components/Character Card/CharacterCard';
 import CharacterModal from './components/Character Modal/CharacterModal';
@@ -27,12 +27,27 @@ const App = () => {
   const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await getCharactersByPage(page);
+        setCharacters(response.data.results);
+        setFilteredCharacters(response.data.results);
+        setError(false);
+      } catch (err) {
+        setError(true);
+      }
+      setLoading(false);
+    };
+
     fetchData();
-  }, []);
+  }, [page]);
+  
+
 
   const fetchData = async () => {
     try {
-      const response = await getCharacters();
+      const response = await getCharactersByPage(page);
       setCharacters(response.data.results);
       setFilteredCharacters(response.data.results);
       setLoading(false);
@@ -135,6 +150,14 @@ const App = () => {
           />
         </>
       )}
+
+      {/* pagination */}
+      <div className="pagination">
+        <button onClick={() => {setPage(page - 1); console.log(page)}} disabled={page === 1}>Previous</button>
+        <button onClick={() => {setPage(page + 1); console.log(page)}}>Next</button>
+      </div>
+
+
     </div>
 
   );

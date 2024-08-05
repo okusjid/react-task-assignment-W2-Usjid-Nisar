@@ -78,28 +78,6 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.ReactModal__Content h2 {
-  margin-top: 0;
-}
-
-.ReactModal__Content p {
-  margin: 10px 0;
-}
-
-.ReactModal__Content button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.ReactModal__Content button:hover {
-  background-color: #0056b3;
-}
 
 /* Search and Filter Styles */
 .search-filter {
