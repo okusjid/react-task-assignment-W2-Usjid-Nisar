@@ -123,3 +123,9 @@ body {
   border-color: #007bff;
   outline: none;
 }
+
+h1 {
+  color: #333;
+  /* text-decoration: underline; */
+  text-transform: uppercase;
+}

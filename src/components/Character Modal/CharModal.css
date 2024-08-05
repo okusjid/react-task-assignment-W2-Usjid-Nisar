@@ -1,21 +1,85 @@
-modalStyle  {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-Index: 1000;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-  overlayStyle {
+/* Overlay styles with a subtle fade-in effect */
+.overlayStyle {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-Index: 1000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Lighter overlay for less screen dominance */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+}
+
+.overlayStyle.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal box with vibrant colors and shadow for depth */
+.modalStyle {
+  position: relative;
+  width: auto;
+  max-width: 400px; /* Smaller max-width for a more compact design */
+  background: #ffffff; /* Bright white background */
+  padding: 5px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  transform: scale(0.9);
+  transition: transform 0.3s ease-out, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.modalStyle.active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+
+
+/* Header styles with vibrant color */
+h2 {
+  font-size: 1.5rem;
+  color: #1a73e8; /* Attractive blue */
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 1.2rem;
+  color: #1a73e8; /* Attractive blue */
+  margin-bottom: 10px;
+} 
+/* Paragraph styling with colorful accents */
+p {
+  font-size: 1rem;
+  color: #333; /* Darker text for better readability */
+  line-height: 1.5;
+}
+
+/* Button with colorful and interactive effects */
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+}
+
+button:hover {
+  background-color: green; /* Darker shade of green on hover */
+}
+
+/* Layout adjustments for aesthetics */
+button {
+  margin-top: 20px;
+  width: 100%;
+  /* color: #000; */
+  border: #000;
 }

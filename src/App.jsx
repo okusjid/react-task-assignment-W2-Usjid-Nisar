@@ -21,7 +21,7 @@ const App = () => {
   const [homeWorld, setHomeWorld] = useState(null);
   
   
-  // const [filterOption, setFilterOption] = useState('');
+  const [filterOption, setFilterOption] = useState('');
   // const [page, setPage] = useState(1);
 
   const openModal = () => setIsModalOpen(true);
