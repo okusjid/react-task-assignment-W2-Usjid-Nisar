@@ -14,14 +14,14 @@ const App = () => {
   const [error, setError] = useState(false);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [homeWorld, setHomeWorld] = useState(null);
-  
+
   const [filterOption, setFilterOption] = useState('');
   const [page, setPage] = useState(1);
-  
+
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -42,20 +42,20 @@ const App = () => {
 
     fetchData();
   }, [page]);
-  
 
 
-  const fetchData = async () => {
-    try {
-      const response = await getCharactersByPage(page);
-      setCharacters(response.data.results);
-      setFilteredCharacters(response.data.results);
-      setLoading(false);
-    } catch (err) {
-      setError(true);
-      setLoading(false);
-    }
-  };
+
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await getCharactersByPage(page);
+  //     setCharacters(response.data.results);
+  //     setFilteredCharacters(response.data.results);
+  //     setLoading(false);
+  //   } catch (err) {
+  //     setError(true);
+  //     setLoading(false);
+  //   }
+  // };
 
   const handleCharacterClick = async (character) => {
     setSelectedCharacter(character);
@@ -66,7 +66,7 @@ const App = () => {
     // console.log(homeWorldResponse);
   };
 
-  
+
   const handleSearch = (query) => {
     setSearchQuery(query);
     filterAndSearch(query, filterOption);
@@ -93,7 +93,7 @@ const App = () => {
 
 
   if (loading) return <Loader />;
-  if (error) return <div>Error loading data</div>;
+  if (error) return <div className='error'>Error loading data</div>;
 
   return (
     <div className="App">
@@ -107,18 +107,25 @@ const App = () => {
         onChange={(e) => handleSearch(e.target.value)}
       />
 
+      <div className="container">
+        <div className='previouspage'>
+          <button onClick={() => { setPage(page - 1); console.log(page) }} disabled={page === 1}>←</button>
+        </div>
 
+        <div className="character-list">
+          {filteredCharacters.map((character) => (
+            <CharacterCard
+              key={character.name}
+              character={character}
+              speciesColor="lightblue" // change color
+              onClick={() => handleCharacterClick(character)}
+            />
+          ))}
+        </div>
 
-
-      <div className="character-list">
-        {filteredCharacters.map((character) => (
-          <CharacterCard
-            key={character.name}
-            character={character}
-            speciesColor="lightblue" // change color
-            onClick={() => handleCharacterClick(character)}
-          />
-        ))}
+        <div className='nextpage'>
+          <button onClick={() => { setPage(page + 1); console.log(page) }}>→</button>
+        </div>
       </div>
 
       {/* <div>
@@ -150,15 +157,9 @@ const App = () => {
           />
         </>
       )}
-
-      {/* pagination */}
-      <div className="pagination">
-        <button onClick={() => {setPage(page - 1); console.log(page)}} disabled={page === 1}>Previous</button>
-        <button onClick={() => {setPage(page + 1); console.log(page)}}>Next</button>
-      </div>
-
-
+=
     </div>
+
 
   );
 };
