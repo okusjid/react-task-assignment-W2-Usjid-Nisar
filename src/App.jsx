@@ -8,6 +8,7 @@ import "./App.css";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
+  const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(false);
   const [filteredCharacters, setFilteredCharacters] = useState();
   const [searchQuery, setSearchQuery] = useState("");
