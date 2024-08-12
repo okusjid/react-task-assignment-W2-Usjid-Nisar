@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export const usePagination = (initialPage = 1) => {
   const [page, setPage] = useState(initialPage);
-  const [totalPages, setTotalPages] = useState(0);
+  const [totalPages, setTotalPages] = useState(82);
 
   const nextPage = () => {
     if (page < totalPages) {

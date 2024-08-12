@@ -2,6 +2,10 @@ import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './login.module.css'; // Import the CSS module
 
+
+const LoginURL = import.meta.env.VITE_Login;
+
+
 const LoginPage = () => {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
@@ -24,7 +28,7 @@ const LoginPage = () => {
     }
 
     try {
-      const response = await fetch('https://dummyjson.com/auth/login', {
+      const response = await fetch(LoginURL, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json' 
