@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CharacterCard from "../CharacterCard";
@@ -18,7 +18,7 @@ const ListingPage = () => {
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
 
-  const { page, totalPages, nextPage, prevPage, setPage,setTotalPages } = usePagination(1); // Use the custom hook
+  const { page, totalPages, nextPage, prevPage, setPage, setTotalPages } = usePagination(1);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,17 +28,16 @@ const ListingPage = () => {
     }
   }, [navigate]);
 
+  const endpoint = useCallback(() => {
+    return query ? `https://swapi.dev/api/people/?search=${query}` : `https://swapi.dev/api/people/?page=${page}`;
+  }, [query, page]);
+
   useEffect(() => {
     const fetchCharacters = async () => {
       setLoading(true);
       setError(null);
-
       try {
-        const endpoint = query
-          ? `https://swapi.dev/api/people/?search=${query}`
-          : `https://swapi.dev/api/people/?page=${page}`;
-
-        const response = await axios.get(endpoint);
+        const response = await axios.get(endpoint());
         setCharacters(response.data.results);
         setTotalPages(Math.ceil(response.data.count / 10));
       } catch (err) {
@@ -47,24 +46,23 @@ const ListingPage = () => {
         setLoading(false);
       }
     };
-
     fetchCharacters();
-  }, [query, page, setTotalPages]);
+  }, [endpoint, setTotalPages]);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openModal = useCallback(() => setIsModalOpen(true), []);
+  const closeModal = useCallback(() => setIsModalOpen(false), []);
 
-  const handleCharacterClick = async (character) => {
+  const handleCharacterClick = useCallback(async (character) => {
     setSelectedCharacter(character);
     const homeWorldResponse = await axios.get(character.homeworld);
     setHomeWorld(homeWorldResponse.data);
     openModal();
-  };
+  }, [openModal]);
 
-  const handleSearch = (query) => {
+  const handleSearch = useCallback((query) => {
     setQuery(query);
-    setPage(page); // Reset to first page when searching
-  };
+    setPage(page); // Reset to the current page when searching
+  }, [setPage, page]);
 
   if (loading) return <Loader />;
   if (error) return <div className="error">{error}</div>;
@@ -90,20 +88,8 @@ const ListingPage = () => {
       <div className="pageNumber">Page: {page} of {totalPages}</div>
 
       <div className="paginationContainer">
-        <button
-          onClick={prevPage}
-          disabled={page === 1}
-          className="paginationButton"
-        >
-          ← Previous
-        </button>
-        <button
-          onClick={nextPage}
-          disabled={page === totalPages}
-          className="paginationButton"
-        >
-          Next →
-        </button>
+        <button onClick={prevPage} disabled={page === 1} className="paginationButton">← Previous</button>
+        <button onClick={nextPage} disabled={page === totalPages} className="paginationButton">Next →</button>
       </div>
 
       {selectedCharacter && (
