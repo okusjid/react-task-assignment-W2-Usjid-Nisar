@@ -25,10 +25,16 @@ const ListingPage = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/login");
+    if (token) {
+      const expirationTime = 30 * 60 * 1000; // 30 minutes in milliseconds
+      const timer = setTimeout(() => {
+        localStorage.removeItem("token");
+        navigate("/login");
+      }, expirationTime);
+      return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
     }
   }, [navigate]);
+  
 
   const endpoint = useCallback(() => {
     return query
