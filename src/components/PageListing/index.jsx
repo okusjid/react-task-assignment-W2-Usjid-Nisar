@@ -18,7 +18,7 @@ const ListingPage = () => {
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
 
-  const { page, totalPages, nextPage, prevPage, setPage } = usePagination(1); // Use the custom hook
+  const { page, totalPages, nextPage, prevPage, setPage,setTotalPages } = usePagination(1); // Use the custom hook
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,6 +40,7 @@ const ListingPage = () => {
 
         const response = await axios.get(endpoint);
         setCharacters(response.data.results);
+        setTotalPages(Math.ceil(response.data.count / 10));
       } catch (err) {
         setError("Error fetching data");
       } finally {
@@ -48,7 +49,7 @@ const ListingPage = () => {
     };
 
     fetchCharacters();
-  }, [query, page]);
+  }, [query, page, setTotalPages]);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
