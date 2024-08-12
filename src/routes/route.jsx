@@ -8,7 +8,7 @@ const MyRoute = () => {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/listing" element={<ListingPage />} />
+      <Route path="/" element={<ListingPage />} />
       <Route path="/logout" element={<Logout />} />
     </Routes>
   );

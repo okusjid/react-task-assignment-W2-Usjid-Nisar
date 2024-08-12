@@ -40,7 +40,7 @@ const LoginPage = () => {
 
       if (response.ok) {
         localStorage.setItem('token', data.token);
-        navigate('/listing');
+        navigate('/');
       } else {
         setError(data.message || "Login failed. Please try again.");
       }

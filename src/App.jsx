@@ -1,4 +1,3 @@
-// import "./App.css";
 import MyRoute from "./routes/route";
 
 const App = () => {
