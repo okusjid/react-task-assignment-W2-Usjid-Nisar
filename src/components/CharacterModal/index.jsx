@@ -4,66 +4,63 @@ import { format } from "date-fns";
 import axios from "axios";
 import "./CharModal.css";
 
-const CharacterModal = ({ selectedCharacter, setSelectedCharacter }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const CharacterModal = ({ isOpen, close, character }) => {
   const [homeWorld, setHomeWorld] = useState(null);
 
   useEffect(() => {
     const handleEscape = (event) => {
-      if (event.keyCode === 27) closeModal(); // Close modal on ESC
+      if (event.keyCode === 27) close(); // Close modal on ESC
     };
     document.addEventListener("keydown", handleEscape);
     return () => {
       document.removeEventListener("keydown", handleEscape);
     };
-  }, []);
+  }, [close]);
 
   useEffect(() => {
-    if (selectedCharacter) {
+    if (character) {
       const fetchHomeWorld = async () => {
-        const homeWorldResponse = await axios.get(selectedCharacter.homeworld);
-        setHomeWorld(homeWorldResponse.data);
+        try {
+          const homeWorldResponse = await axios.get(character.homeworld);
+          setHomeWorld(homeWorldResponse.data);
+        } catch (error) {
+          console.error("Error fetching homeworld:", error);
+          setHomeWorld(null);
+        }
       };
       fetchHomeWorld();
-      openModal();
     }
-  }, [selectedCharacter]);
+  }, [character]);
 
-  const openModal = useCallback(() => setIsModalOpen(true), []);
-  const closeModal = useCallback(() => {
-    setIsModalOpen(false);
-    setSelectedCharacter(null); // Clear the selected character when closing modal
-  }, [setSelectedCharacter]);
-
-  if (!isModalOpen || !selectedCharacter) return null;
+  if (!isOpen || !character) return null;
 
   const stopPropagation = (e) => e.stopPropagation();
 
   return (
-    <div className={`overlayStyle ${isModalOpen ? "active" : ""}`} onClick={closeModal}>
+    <div className={`overlayStyle ${isOpen ? "active" : ""}`} onClick={close}>
       <div
-        className={`modalStyle ${isModalOpen ? "active" : ""}`}
+        className={`modalStyle ${isOpen ? "active" : ""}`}
         onClick={stopPropagation}
       >
         <h2>
-          <strong>{selectedCharacter.name}</strong>
+          <strong>{character.name}</strong>
         </h2>
         <p>
-          <strong>Height:</strong> {selectedCharacter.height / 100} meters
+          <strong>Height:</strong> {Number(character.height) / 100} meters
         </p>
         <p>
           <strong>Mass: </strong>
-          {selectedCharacter.mass} kg
+          {character.mass} kg
         </p>
         <p>
-          <strong>Birth Year:</strong> {selectedCharacter.birth_year}
+          <strong>Birth Year:</strong> {character.birth_year}
         </p>
         <p>
           <strong>Date Added: </strong>
-          {format(new Date(selectedCharacter.created), "dd-MM-yyyy")}
+          {format(new Date(character.created), "dd-MM-yyyy")}
         </p>
         <p>
-          <strong>Number of Films:</strong> {selectedCharacter.films.length}
+          <strong>Number of Films:</strong> {character.films.length}
         </p>
         {homeWorld && (
           <div style={{ textDecoration: "capitalize" }}>
@@ -87,7 +84,7 @@ const CharacterModal = ({ selectedCharacter, setSelectedCharacter }) => {
             </p>
           </div>
         )}
-        <button onClick={closeModal}>Close</button>
+        <button onClick={close}>Close</button>
       </div>
     </div>
   );
@@ -95,15 +92,17 @@ const CharacterModal = ({ selectedCharacter, setSelectedCharacter }) => {
 
 // validation
 CharacterModal.propTypes = {
-  selectedCharacter: PropTypes.shape({
+  isOpen: PropTypes.bool.isRequired,
+  close: PropTypes.func.isRequired,
+  character: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    height: PropTypes.number.isRequired,
-    mass: PropTypes.number.isRequired,
+    height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    mass: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     birth_year: PropTypes.string.isRequired,
     created: PropTypes.string.isRequired,
     films: PropTypes.arrayOf(PropTypes.string).isRequired,
+    homeworld: PropTypes.string.isRequired
   }),
-  setSelectedCharacter: PropTypes.func.isRequired,
 };
 
 export default CharacterModal;
