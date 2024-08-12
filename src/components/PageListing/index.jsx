@@ -1,3 +1,4 @@
+// ListingPage.js
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -6,6 +7,7 @@ import CharacterModal from "../../components/CharacterModal";
 import Loader from "../../components/Loader";
 import Logout from "../Logout";
 import SearchComponent from "../../components/Search";
+import PaginationControls from "../PaginationControls"; // Ensure correct path
 import { usePagination } from "../../hooks/usePagination";
 import "./ListingPage.css";
 
@@ -17,7 +19,8 @@ const ListingPage = () => {
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
 
-  const { page, totalPages, nextPage, prevPage, setPage, setTotalPages } = usePagination(1);
+  const { page, totalPages, nextPage, prevPage, setPage, setTotalPages } =
+    usePagination(1);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,7 +31,9 @@ const ListingPage = () => {
   }, [navigate]);
 
   const endpoint = useCallback(() => {
-    return query ? `https://swapi.dev/api/people/?search=${query}` : `https://swapi.dev/api/people/?page=${page}`;
+    return query
+      ? `https://swapi.dev/api/people/?search=${query}`
+      : `https://swapi.dev/api/people/?page=${page}`;
   }, [query, page]);
 
   useEffect(() => {
@@ -58,10 +63,13 @@ const ListingPage = () => {
     setSelectedCharacter(null);
   }, []);
 
-  const handleSearch = useCallback((query) => {
-    setQuery(query);
-    setPage(page); // Reset to page 1 when searching
-  }, [setPage, page]);
+  const handleSearch = useCallback(
+    (query) => {
+      setQuery(query);
+      setPage(page); // Reset to current page when searching
+    },
+    [setPage,page]
+  );
 
   if (loading) return <Loader />;
   if (error) return <div className="error">{error}</div>;
@@ -77,19 +85,25 @@ const ListingPage = () => {
           <CharacterCard
             key={character.name}
             character={character}
-            speciesColor={character.eye_color || character.hair_color || "brown"}
+            speciesColor={
+              character.eye_color || character.hair_color || "brown"
+            }
             onClick={() => handleCharacterClick(character)}
             className="characterCard"
           />
         ))}
       </div>
 
-      <div className="pageNumber">Page: {page} of {totalPages}</div>
-
-      <div className="paginationContainer">
-        <button onClick={prevPage} disabled={page === 1} className="paginationButton">← Previous</button>
-        <button onClick={nextPage} disabled={page === totalPages} className="paginationButton">Next →</button>
+      <div className="pageNumber">
+        Page: {page} of {totalPages}
       </div>
+
+      <PaginationControls
+        page={page}
+        totalPages={totalPages}
+        nextPage={nextPage}
+        prevPage={prevPage}
+      />
 
       <CharacterModal
         isOpen={isModalOpen}
