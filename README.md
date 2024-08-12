@@ -32,7 +32,7 @@ cd star-wars
 ## Acknowledgments
 
 - **[SWAPI](https://swapi.dev/)** for providing the Star Wars API.
-- **[StarWars Visual Guide](https://starwars-visualguide.com/assets/img/characters)** for providing character images.
+- **[StarWars Visual Guide](https://starwars-visualguide.com/)** for providing character images.
 - **[Vite](https://vitejs.dev/)** for the development environment.
 
 
