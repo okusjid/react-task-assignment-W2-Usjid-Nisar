@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './login.module.css'; // Import the CSS module
+import './login.css'; // Import the CSS module
 
 
 const LoginURL = import.meta.env.VITE_Login;
@@ -54,19 +54,19 @@ const LoginPage = () => {
   };
 
   return (
-    <div className={styles.loginContainer}> {/* Use the class from the module */}
-      <h1 className={styles.heading}>Login</h1>
-      {error && <p className={styles.error}>{error}</p>}
+    <div className="loginContainer"> {/* Use the class from the module */}
+      <h1 className="heading">Login</h1>
+      {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Username:</label>
-          <input type="text" ref={usernameRef} className={styles.input} />
+        <div className="formGroup">
+          <label className="label">Username:</label>
+          <input type="text" ref={usernameRef} className="input" />
         </div>
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Password:</label>
-          <input type="password" ref={passwordRef} className={styles.input} />
+        <div className="formGroup">
+          <label className="label">Password:</label>
+          <input type="password" ref={passwordRef} className="input" />
         </div>
-        <button type="submit" className={styles.button}>Login</button>
+        <button type="submit" className="button">Login</button>
       </form>
     </div>
   );

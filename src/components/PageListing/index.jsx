@@ -6,7 +6,7 @@ import CharacterModal from "../../components/CharacterModal";
 import Loader from "../../components/Loader";
 import Logout from "../Logout";
 import SearchComponent from "../../components/Search"; // Import the SearchComponent
-import styles from './ListingPage.module.css'; // Import the CSS module
+import "./ListingPage.css"; // Import the simple CSS
 
 const ListingPage = () => {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
@@ -61,7 +61,7 @@ const ListingPage = () => {
 
   const handleSearch = (query) => {
     setQuery(query);
-    setPage(page); // Reset to first page when searching
+    setPage(page); //reset to current page when searching
   };
 
   const handleNextPage = () => {
@@ -75,36 +75,38 @@ const ListingPage = () => {
   };
 
   if (loading) return <Loader />;
-  if (error) return <div className={styles.error}>{error}</div>;
+  if (error) return <div className="error">{error}</div>;
 
   return (
-    <div className={styles.appContainer}>
+    <div className="pageListing">
       <Logout />
-      <h1 className={styles.header}>Star Wars Characters</h1>
+      <h1 className="header">Star Wars Characters</h1>
 
       <SearchComponent onSearch={handleSearch} initialQuery={query} />
 
-      <div className={styles.paginationContainer}>
+      <div className="paginationContainer">
         <button
           onClick={handlePrevPage}
           disabled={page === 1}
-          className={styles.paginationButton}
+          className="paginationButton"
         >
           ← Previous
         </button>
-        <button onClick={handleNextPage} className={styles.paginationButton}>
+        <button onClick={handleNextPage} className="paginationButton">
           Next →
         </button>
       </div>
 
-      <div className={styles.characterList}>
+      <div className="characterList">
         {characters.map((character) => (
           <CharacterCard
             key={character.name}
             character={character}
-            speciesColor={character.eye_color || character.hair_color || "brown"}
+            speciesColor={
+              character.eye_color || character.hair_color || "brown"
+            }
             onClick={() => handleCharacterClick(character)}
-            className={styles.characterCard}
+            className="characterCard"
           />
         ))}
       </div>
@@ -115,8 +117,8 @@ const ListingPage = () => {
           close={closeModal}
           character={selectedCharacter}
           homeWorld={homeWorld}
-          overlayClassName={styles.modalOverlay}
-          className={styles.modalContent}
+          overlayClassName="modalOverlay"
+          className="modalContent"
         />
       )}
     </div>

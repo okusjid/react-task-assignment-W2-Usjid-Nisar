@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "./Search.module.css"; // Import the CSS module
+import "./Search.css"; // Import the CSS module
 import propTypes from "prop-types";
 
 const SearchComponent = ({ onSearch, initialQuery = "" }) => {
@@ -18,13 +18,13 @@ const SearchComponent = ({ onSearch, initialQuery = "" }) => {
   };
 
   return (
-    <div className={styles.searchContainer}>
+    <div className="searchContainer">
       <input
         type="text"
         placeholder="Search characters"
         value={searchInput}
         onChange={handleSearchChange}
-        className={styles.searchInput}
+        className="searchInput"
       />  
     </div>
   );

@@ -1,8 +1,9 @@
 /* Position the logout button in the top-right corner */
 .logoutButton {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  position: relative;
+  /* margin-top: 40px;
+  margin-bottom: 20px; */
+  /* right: 20px; */
   background-color: #ff4d4f;
   color: white;
   padding: 10px 15px;

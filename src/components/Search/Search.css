@@ -13,14 +13,7 @@
     border-radius: 4px;
   }
   
-  .formatSelect {
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-left: 10px;
-    cursor: pointer;
-  }
+
   
   .searchInput:focus, .formatSelect:focus {
     outline: none;
