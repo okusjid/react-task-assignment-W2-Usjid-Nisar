@@ -6,15 +6,14 @@ import CharacterModal from "../../components/CharacterModal";
 import Loader from "../../components/Loader";
 import Logout from "../Logout";
 import SearchComponent from "../../components/Search";
-import { usePagination } from "../../hooks/usePagination"; // Import the custom hook
+import { usePagination } from "../../hooks/usePagination";
 import "./ListingPage.css";
 
 const ListingPage = () => {
+  const [characters, setCharacters] = useState([]);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [homeWorld, setHomeWorld] = useState(null);
-  const [characters, setCharacters] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
 
@@ -49,19 +48,19 @@ const ListingPage = () => {
     fetchCharacters();
   }, [endpoint, setTotalPages]);
 
-  const openModal = useCallback(() => setIsModalOpen(true), []);
-  const closeModal = useCallback(() => setIsModalOpen(false), []);
-
-  const handleCharacterClick = useCallback(async (character) => {
+  const handleCharacterClick = useCallback((character) => {
     setSelectedCharacter(character);
-    const homeWorldResponse = await axios.get(character.homeworld);
-    setHomeWorld(homeWorldResponse.data);
-    openModal();
-  }, [openModal]);
+    setIsModalOpen(true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setIsModalOpen(false);
+    setSelectedCharacter(null);
+  }, []);
 
   const handleSearch = useCallback((query) => {
     setQuery(query);
-    setPage(page); // Reset to the current page when searching
+    setPage(page); // Reset to page 1 when searching
   }, [setPage, page]);
 
   if (loading) return <Loader />;
@@ -92,16 +91,11 @@ const ListingPage = () => {
         <button onClick={nextPage} disabled={page === totalPages} className="paginationButton">Next →</button>
       </div>
 
-      {selectedCharacter && (
-        <CharacterModal
-          isOpen={isModalOpen}
-          close={closeModal}
-          character={selectedCharacter}
-          homeWorld={homeWorld}
-          overlayClassName="modalOverlay"
-          className="modalContent"
-        />
-      )}
+      <CharacterModal
+        isOpen={isModalOpen}
+        close={closeModal}
+        character={selectedCharacter}
+      />
     </div>
   );
 };
