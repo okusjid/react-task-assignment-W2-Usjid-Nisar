@@ -21,8 +21,6 @@ const LoginPage = () => {
       return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
     }
   }, [navigate]);
-  
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,7 +65,6 @@ const LoginPage = () => {
 
   return (
     <div className="loginContainer">
-      {" "}
       {/* Use the class from the module */}
       <h1 className="heading">Login</h1>
       {error && <p className="error">{error}</p>}
