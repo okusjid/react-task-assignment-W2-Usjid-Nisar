@@ -6,6 +6,7 @@ import CharacterModal from "../../components/CharacterModal";
 import Loader from "../../components/Loader";
 import Logout from "../Logout";
 import SearchComponent from "../../components/Search"; // Import the SearchComponent
+import { getCharactersByPage } from "../../services/api";
 import "./ListingPage.css"; // Import the simple CSS
 
 const ListingPage = () => {
@@ -84,19 +85,6 @@ const ListingPage = () => {
 
       <SearchComponent onSearch={handleSearch} initialQuery={query} />
 
-      <div className="paginationContainer">
-        <button
-          onClick={handlePrevPage}
-          disabled={page === 1}
-          className="paginationButton"
-        >
-          ← Previous
-        </button>
-        <button onClick={handleNextPage} className="paginationButton">
-          Next →
-        </button>
-      </div>
-
       <div className="characterList">
         {characters.map((character) => (
           <CharacterCard
@@ -109,6 +97,21 @@ const ListingPage = () => {
             className="characterCard"
           />
         ))}
+      </div>
+
+      <div className="pageNumber">Page: {page}</div>
+
+      <div className="paginationContainer">
+        <button
+          onClick={handlePrevPage}
+          disabled={page === 1}
+          className="paginationButton"
+        >
+          ← Previous
+        </button>
+        <button onClick={handleNextPage} className="paginationButton">
+          Next →
+        </button>
       </div>
 
       {selectedCharacter && (

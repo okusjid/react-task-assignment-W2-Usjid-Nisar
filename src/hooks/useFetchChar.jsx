@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { getCharactersByPage } from '../services/api';
+import { useState, useEffect } from "react";
+import { getCharactersByPage } from "../services/api";
 
 export const useFetchCharacters = (page) => {
   const [loading, setLoading] = useState(true);

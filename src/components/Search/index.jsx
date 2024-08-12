@@ -25,7 +25,7 @@ const SearchComponent = ({ onSearch, initialQuery = "" }) => {
         value={searchInput}
         onChange={handleSearchChange}
         className="searchInput"
-      />  
+      />
     </div>
   );
 };

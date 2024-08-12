@@ -14,3 +14,6 @@ export const getCharacterDetails = (charId) =>
   axios.get(`${BASE_URL}/people/${charId}`);
 export const getCharactersByPage = (page) =>
   axios.get(`${BASE_URL}/people?page=${page}`);
+
+export const getSearchedCharacters = (query) =>
+  axios.get(`${BASE_URL}/people/?search=${query}`);

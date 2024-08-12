@@ -1,10 +1,8 @@
-import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './login.css'; // Import the CSS module
-
+import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./login.css"; // Import the CSS module
 
 const LoginURL = import.meta.env.VITE_Login;
-
 
 const LoginPage = () => {
   const usernameRef = useRef(null);
@@ -29,22 +27,22 @@ const LoginPage = () => {
 
     try {
       const response = await fetch(LoginURL, {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json' 
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           username: username,
           password: password,
-          expiresInMins: 30
+          expiresInMins: 30,
         }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem('token', data.token);
-        navigate('/');
+        localStorage.setItem("token", data.token);
+        navigate("/");
       } else {
         setError(data.message || "Login failed. Please try again.");
       }
@@ -54,7 +52,9 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="loginContainer"> {/* Use the class from the module */}
+    <div className="loginContainer">
+      {" "}
+      {/* Use the class from the module */}
       <h1 className="heading">Login</h1>
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
@@ -66,7 +66,9 @@ const LoginPage = () => {
           <label className="label">Password:</label>
           <input type="password" ref={passwordRef} className="input" />
         </div>
-        <button type="submit" className="button">Login</button>
+        <button type="submit" className="button">
+          Login
+        </button>
       </form>
     </div>
   );

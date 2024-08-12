@@ -1,13 +1,13 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Logout.css'; // Import the CSS module
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "./Logout.css"; // Import the CSS module
 
 const Logout = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/login');
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (

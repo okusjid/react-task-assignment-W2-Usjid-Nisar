@@ -1,18 +1,18 @@
 /* Position the logout button in the top-right corner */
 .logoutButton {
   position: relative;
-  /* margin-top: 40px;
-  margin-bottom: 20px; */
-  /* right: 20px; */
+  left: 94%;
   background-color: #ff4d4f;
   color: white;
-  padding: 10px 15px;
+  padding: 0px 10px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
   transition: background-color 0.3s ease;
+  width: 66px;
+  height: 35px;
 }
 
 .logoutButton:hover {
