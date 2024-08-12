@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css"; // Import the CSS module
 
@@ -9,6 +9,14 @@ const LoginPage = () => {
   const passwordRef = useRef(null);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/");
+    }
+  }, [navigate]);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
