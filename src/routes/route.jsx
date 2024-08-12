@@ -4,6 +4,7 @@ import LoginPage from "../components/Login";
 import ListingPage from "../components/PageListing";
 import Logout from "../components/Logout";
 
+// Create a MyRoute component to define the routes
 const MyRoute = () => {
   return (
     <Routes>

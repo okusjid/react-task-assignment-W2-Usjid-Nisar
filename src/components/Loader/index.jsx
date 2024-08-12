@@ -1,6 +1,7 @@
 import "./Loader.css";
 import { RotateLoader } from "react-spinners";
 
+// Create a Loader component
 function Loader() {
   return (
     <>

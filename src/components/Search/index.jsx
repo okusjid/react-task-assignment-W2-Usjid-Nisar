@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./Search.css"; // Import the CSS module
 import propTypes from "prop-types";
 
-const SearchComponent = ({ onSearch, initialQuery = "" }) => {
+const SearchComponent = ({ onSearch, initialQuery = "" }) => { // Add the initialQuery prop with a default value
   const [searchInput, setSearchInput] = useState(initialQuery);
 
   useEffect(() => {
@@ -10,10 +10,10 @@ const SearchComponent = ({ onSearch, initialQuery = "" }) => {
       onSearch(searchInput);
     }, 500); // 500ms debounce time
 
-    return () => clearTimeout(delayDebounceFn);
+    return () => clearTimeout(delayDebounceFn); // Cleanup the timeout on unmount or re-render
   }, [searchInput, onSearch]);
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e) => { // Add the handleSearchChange function
     setSearchInput(e.target.value);
   };
 
@@ -30,8 +30,9 @@ const SearchComponent = ({ onSearch, initialQuery = "" }) => {
   );
 };
 
+// Add prop validation for the SearchComponent component
 SearchComponent.propTypes = {
-  onSearch: propTypes.func.isRequired,
+  onSearch: propTypes.func.isRequired, // Add prop validation for the onSearch function
   initialQuery: propTypes.string, // Add this prop to allow initializing with an existing query
 };
 

@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import axios from "axios";
 import "./CharModal.css";
 
+// Create a CharacterModal component
 const CharacterModal = ({ isOpen, close, character }) => {
   const [homeWorld, setHomeWorld] = useState(null);
 
@@ -18,6 +19,7 @@ const CharacterModal = ({ isOpen, close, character }) => {
   }, [close]);
 
   useEffect(() => {
+    // Fetch homeworld data
     if (character) {
       const fetchHomeWorld = async () => {
         try {
@@ -32,9 +34,9 @@ const CharacterModal = ({ isOpen, close, character }) => {
     }
   }, [character]);
 
-  if (!isOpen || !character) return null;
+  if (!isOpen || !character) return null; // Return null if modal is closed or no character
 
-  const stopPropagation = (e) => e.stopPropagation();
+  const stopPropagation = (e) => e.stopPropagation(); // Stop click propagation to prevent closing modal on click
 
   return (
     <div className={`overlayStyle ${isOpen ? "active" : ""}`} onClick={close}>
@@ -90,7 +92,7 @@ const CharacterModal = ({ isOpen, close, character }) => {
   );
 };
 
-// validation
+// validation for the CharacterModal component
 CharacterModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,

@@ -11,6 +11,7 @@ import PaginationControls from "../PaginationControls"; // Ensure correct path
 import { usePagination } from "../../hooks/usePagination";
 import "./ListingPage.css";
 
+// Create a ListingPage component
 const ListingPage = () => {
   const [characters, setCharacters] = useState([]);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
@@ -20,7 +21,7 @@ const ListingPage = () => {
   const [query, setQuery] = useState("");
 
   const { page, totalPages, nextPage, prevPage, setPage, setTotalPages } =
-    usePagination(1);
+    usePagination(1); // Initialize the page state with 1
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,16 +34,15 @@ const ListingPage = () => {
       }, expirationTime);
       return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
     }
-    if(!token) {
+    if (!token) {
       navigate("/login");
     }
   }, [navigate]);
-  
 
-  const endpoint = useCallback(() => {
-    return query
-      ? `https://swapi.dev/api/people/?search=${query}`
-      : `https://swapi.dev/api/people/?page=${page}`;
+  const endpoint = useCallback(() => { // Add useCallback to memoize the endpoint function 
+    return query // Return the correct endpoint based on the query
+      ? `https://swapi.dev/api/people/?search=${query}` // Use the search query
+      : `https://swapi.dev/api/people/?page=${page}`; // Use the page number
   }, [query, page]);
 
   useEffect(() => {
@@ -103,7 +103,8 @@ const ListingPage = () => {
         ))}
       </div>
 
-      <div className="pageNumber">
+      {/* Add the page number display */}
+      <div className="pageNumber"> 
         Page: {page} of {totalPages}
       </div>
 

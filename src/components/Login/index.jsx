@@ -2,13 +2,14 @@ import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css"; // Import the CSS module
 
-const LoginURL = import.meta.env.VITE_Login;
+const LoginURL = import.meta.env.VITE_Login; // Import the login URL from the environment variables
 
+// Create a LoginPage component
 const LoginPage = () => {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Use the navigate hook
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -46,11 +47,11 @@ const LoginPage = () => {
         body: JSON.stringify({
           username: username,
           password: password,
-          expiresInMins: 30,
+          expiresInMins: 30, // Set the expiration time to 30 minutes
         }),
       });
 
-      const data = await response.json();
+      const data = await response.json(); // Parse the JSON response
 
       if (response.ok) {
         localStorage.setItem("token", data.token);

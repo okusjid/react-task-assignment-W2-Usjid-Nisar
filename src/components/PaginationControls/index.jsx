@@ -3,7 +3,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const PaginationControls = ({ page, totalPages, nextPage, prevPage }) => {
+  // Destructure the props object
   return (
+    // Add the pagination controls markup
     <div className="paginationContainer">
       <button
         onClick={prevPage}
@@ -23,6 +25,7 @@ const PaginationControls = ({ page, totalPages, nextPage, prevPage }) => {
   );
 };
 
+// Add prop validation for the PaginationControls component
 PaginationControls.propTypes = {
   page: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
