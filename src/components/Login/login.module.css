@@ -1,0 +1,96 @@
+/* Center the login form on the page with a background gradient */
+body {
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Style the login container */
+.loginContainer {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Style the heading */
+.heading {
+  font-size: 28px;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Style the form labels */
+.label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #555;
+  text-align: left;
+}
+
+/* Style the input fields with focus effects */
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #333;
+  transition: border 0.3s ease;
+}
+
+.input:focus {
+  border-color: #6e8efb;
+  outline: none;
+  box-shadow: 0 0 8px rgba(110, 142, 251, 0.2);
+}
+
+/* Style the submit button with gradient and hover effects */
+.button {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.button:hover {
+  background: linear-gradient(135deg, #5a76e1, #9169cb);
+  transform: translateY(-2px);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+/* Style the error message */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+}
