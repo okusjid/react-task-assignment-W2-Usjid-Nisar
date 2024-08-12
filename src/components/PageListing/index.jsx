@@ -5,9 +5,9 @@ import CharacterCard from "../CharacterCard";
 import CharacterModal from "../../components/CharacterModal";
 import Loader from "../../components/Loader";
 import Logout from "../Logout";
-import SearchComponent from "../../components/Search"; // Import the SearchComponent
-import { getCharactersByPage } from "../../services/api";
-import "./ListingPage.css"; // Import the simple CSS
+import SearchComponent from "../../components/Search";
+import { usePagination } from "../../hooks/usePagination"; // Import the custom hook
+import "./ListingPage.css";
 
 const ListingPage = () => {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
@@ -16,9 +16,9 @@ const ListingPage = () => {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [query, setQuery] = useState(""); // Track the query here
-  const [page, setPage] = useState(1); // Track current page
+  const [query, setQuery] = useState("");
 
+  const { page, totalPages, nextPage, prevPage, setPage } = usePagination(1); // Use the custom hook
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -62,17 +62,7 @@ const ListingPage = () => {
 
   const handleSearch = (query) => {
     setQuery(query);
-    setPage(page); //reset to current page when searching
-  };
-
-  const handleNextPage = () => {
-    setPage((prevPage) => prevPage + 1);
-  };
-
-  const handlePrevPage = () => {
-    if (page > 1) {
-      setPage((prevPage) => prevPage - 1);
-    }
+    setPage(page); // Reset to first page when searching
   };
 
   if (loading) return <Loader />;
@@ -82,7 +72,6 @@ const ListingPage = () => {
     <div className="pageListing">
       <Logout />
       <h1 className="header">Star Wars Characters</h1>
-
       <SearchComponent onSearch={handleSearch} initialQuery={query} />
 
       <div className="characterList">
@@ -90,26 +79,28 @@ const ListingPage = () => {
           <CharacterCard
             key={character.name}
             character={character}
-            speciesColor={
-              character.eye_color || character.hair_color || "brown"
-            }
+            speciesColor={character.eye_color || character.hair_color || "brown"}
             onClick={() => handleCharacterClick(character)}
             className="characterCard"
           />
         ))}
       </div>
 
-      <div className="pageNumber">Page: {page}</div>
+      <div className="pageNumber">Page: {page} of {totalPages}</div>
 
       <div className="paginationContainer">
         <button
-          onClick={handlePrevPage}
+          onClick={prevPage}
           disabled={page === 1}
           className="paginationButton"
         >
           ← Previous
         </button>
-        <button onClick={handleNextPage} className="paginationButton">
+        <button
+          onClick={nextPage}
+          disabled={page === totalPages}
+          className="paginationButton"
+        >
           Next →
         </button>
       </div>

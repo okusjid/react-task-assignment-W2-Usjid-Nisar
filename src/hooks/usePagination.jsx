@@ -19,7 +19,7 @@ export const usePagination = (initialPage = 1) => {
   return {
     page,
     totalPages,
-    setTotalPages,
+    setPage,
     nextPage,
     prevPage,
   };
