@@ -68,7 +68,7 @@ const ListingPage = () => {
       setQuery(query);
       setPage(page); // Reset to current page when searching
     },
-    [setPage,page]
+    [setPage, page]
   );
 
   if (loading) return <Loader />;

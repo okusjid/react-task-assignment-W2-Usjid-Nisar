@@ -5,10 +5,18 @@ import PropTypes from "prop-types";
 const PaginationControls = ({ page, totalPages, nextPage, prevPage }) => {
   return (
     <div className="paginationContainer">
-      <button onClick={prevPage} disabled={page === 1} className="paginationButton">
+      <button
+        onClick={prevPage}
+        disabled={page === 1}
+        className="paginationButton"
+      >
         ← Previous
       </button>
-      <button onClick={nextPage} disabled={page === totalPages} className="paginationButton">
+      <button
+        onClick={nextPage}
+        disabled={page === totalPages}
+        className="paginationButton"
+      >
         Next →
       </button>
     </div>

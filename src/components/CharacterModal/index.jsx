@@ -96,12 +96,13 @@ CharacterModal.propTypes = {
   close: PropTypes.func.isRequired,
   character: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    height: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+      .isRequired,
     mass: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     birth_year: PropTypes.string.isRequired,
     created: PropTypes.string.isRequired,
     films: PropTypes.arrayOf(PropTypes.string).isRequired,
-    homeworld: PropTypes.string.isRequired
+    homeworld: PropTypes.string.isRequired,
   }),
 };
 
