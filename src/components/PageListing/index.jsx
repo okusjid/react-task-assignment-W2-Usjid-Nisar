@@ -33,6 +33,9 @@ const ListingPage = () => {
       }, expirationTime);
       return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
     }
+    if(!token) {
+      navigate("/login");
+    }
   }, [navigate]);
   
 
